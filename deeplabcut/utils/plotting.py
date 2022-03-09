@@ -59,24 +59,39 @@ def PlottingResults(
     ax1.set_ylabel("Y position in pixels")
     ax1.invert_yaxis()
 
-    # Poses vs time
-    fig2 = plt.figure(figsize=(10, 3))
-    ax2 = fig2.add_subplot(111)
-    ax2.set_xlabel("Frame Index")
-    ax2.set_ylabel("X-(dashed) and Y- (solid) position in pixels")
+    # PLOT 2: Poses vs time
+    fig2, ax2 = plt.subplots(figsize=(10, 6), nrows=2, ncols=1, sharex='row')
 
-    # Likelihoods
-    fig3 = plt.figure(figsize=(10, 3))
-    ax3 = fig3.add_subplot(111)
+    # TODO ideally these would be inferred not hardcoded
+    img_width = 1920
+    img_height = 1080
+
+    # x position
+    ax2[0].set_ylabel("x position [pixels]")
+    ax2[0].set_ylim([0, img_width])
+    ax2[0].grid()
+
+    # y position
+    ax2[1].set_xlabel("Frame Index")
+    ax2[1].set_ylabel("y position [pixels]")
+    ax2[1].set_ylim([0, img_height])
+    ax2[1].invert_yaxis()
+    ax2[1].grid()
+
+    # PLOT 3: Likelihoods
+    fig3, ax3 = plt.subplots(figsize=(10, 3))
     ax3.set_xlabel("Frame Index")
     ax3.set_ylabel("Likelihood (use to set pcutoff)")
 
-    # Histograms
-    fig4 = plt.figure()
-    ax4 = fig4.add_subplot(111)
-    ax4.set_ylabel("Count")
-    ax4.set_xlabel("DeltaX and DeltaY")
-    bins = np.linspace(0, np.amax(Dataframe.max()), 100)
+    # PLOT 4: Histograms
+    fig4, ax4 = plt.subplots(figsize=(10, 4), nrows=1, ncols=2)
+
+    ax4[0].set_ylabel("Count")
+    ax4[0].set_xlabel("DeltaX")
+
+    ax4[1].set_xlabel("DeltaY")
+    # bins = np.linspace(0, np.amax(Dataframe.max()), 50)
+    bins = np.linspace(0, 100, 50)
 
     with np.errstate(invalid="ignore"):
         for bpindex, bp in enumerate(bodyparts2plot):
@@ -97,32 +112,31 @@ def PlottingResults(
                 )
                 ax1.plot(temp_x, temp_y, ".", color=colors(bpindex), alpha=alphavalue)
 
-                ax2.plot(
-                    temp_x,
-                    "--",
-                    color=colors(bpindex),
-                    linewidth=linewidth,
-                    alpha=alphavalue,
-                )
-                ax2.plot(
-                    temp_y,
-                    "-",
-                    color=colors(bpindex),
-                    linewidth=linewidth,
-                    alpha=alphavalue,
-                )
+                # Poses vs time
+                ax2[0].plot(temp_x,
+                            "-",
+                            color=colors(bpindex),
+                            linewidth=linewidth,
+                            alpha=alphavalue)
 
-                ax3.plot(
-                    prob,
-                    "-",
-                    color=colors(bpindex),
-                    linewidth=linewidth,
-                    alpha=alphavalue,
-                )
+                ax2[1].plot(temp_y,
+                            "-",
+                            color=colors(bpindex),
+                            linewidth=linewidth,
+                            alpha=alphavalue)
 
-                Histogram(temp_x, colors(bpindex), bins, ax4, linewidth=linewidth)
-                Histogram(temp_y, colors(bpindex), bins, ax4, linewidth=linewidth)
+                # Likelihoods
+                ax3.plot(prob,
+                         "-",
+                         color=colors(bpindex),
+                         linewidth=linewidth,
+                         alpha=alphavalue)
 
+                # Histograms
+                Histogram(temp_x, colors(bpindex), bins, ax4[0], linewidth=linewidth)
+                Histogram(temp_y, colors(bpindex), bins, ax4[1], linewidth=linewidth)
+
+    # Colorbar
     sm = plt.cm.ScalarMappable(
         cmap=plt.get_cmap(cfg["colormap"]),
         norm=plt.Normalize(vmin=0, vmax=len(bodyparts2plot) - 1),
