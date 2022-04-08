@@ -770,7 +770,7 @@ def find_analyzed_data(folder, videoname, scorer, filtered=False, track_method="
     return filepath, scorer, suffix
 
 
-def load_analyzed_data(folder, videoname, scorer, filtered=False, track_method=""):
+def load_analyzed_data(folder, videoname, scorer, filtered=False, track_method="") -> tuple[pd.DataFrame, str, str, str]:
     filepath, scorer, suffix = find_analyzed_data(
         folder, videoname, scorer, filtered, track_method
     )

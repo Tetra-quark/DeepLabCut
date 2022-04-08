@@ -1110,6 +1110,7 @@ def AnalyzeVideo(
             metadata,
             dataname,
             pdindex,
+            # TODO. Its here that dataframe for csv and h5 assigns the images indices.. just integers.. weird no img convention..
             range(nframes),
             save_as_csv,
         )
@@ -1426,6 +1427,7 @@ def analyze_time_lapse_frames(
                     metadata,
                     dataname,
                     pdindex,
+                    # TODO here seems not to use basic index.. what is the difference here.
                     framelist,
                     save_as_csv,
                 )

@@ -419,6 +419,7 @@ def extract_frames(
                         frame = cap.read_frame(crop=True)
                         if frame is not None:
                             image = img_as_ubyte(frame)
+                            # TODO. This is how images are named for the dataset. What does zfill do?
                             img_name = (
                                 str(output_path)
                                 + "/img"

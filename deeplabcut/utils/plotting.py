@@ -184,8 +184,7 @@ def PlottingResults(
     # Colorbar
     sm = plt.cm.ScalarMappable(
         cmap=plt.get_cmap(cfg["colormap"]),
-        norm=plt.Normalize(vmin=0, vmax=len(bodyparts2plot) - 1),
-    )
+        norm=plt.Normalize(vmin=0, vmax=len(bodyparts2plot) - 1))
     sm._A = []
     # print("scalar-mappable: ", sm)
     for ax in ax1, ax2, ax4, ax5:
@@ -317,13 +316,19 @@ def plot_trajectories(
             ['/home/alex/analysis/project/videos/reachingvideo1.avi'],
         )
     """
+
+    # get cfg as a dictionary
     cfg = auxiliaryfunctions.read_config(config)
+
+    # get track method for multianimal projects (box, skeleton or elipse) vs none for single animal
     track_method = auxfun_multianimal.get_track_method(cfg, track_method=track_method)
 
     trainFraction = cfg["TrainingFraction"][trainingsetindex]
     DLCscorer, DLCscorerlegacy = auxiliaryfunctions.get_scorer_name(
         cfg, shuffle, trainFraction, modelprefix=modelprefix
     )  # automatically loads corresponding model (even training iteration based on snapshot index)
+    
+    # select bodyparts (and/or individuals if multianimal) to include in plot
     bodyparts = auxiliaryfunctions.intersection_of_body_parts_and_ones_given_by_user(
         cfg, displayedbodyparts
     )
