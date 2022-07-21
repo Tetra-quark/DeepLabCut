@@ -298,9 +298,11 @@ class TensorpackPoseDataset(BasePoseDataset):
             aug_coords = tfm.apply_coords(coords)
             if aug is self.scaling_apply:
                 scale = aug_img.shape[0] / img.shape[0]
+            # NOTE: see the 4 next lines of code.. strange
             img = aug_img
             coords = aug_coords
 
+        # NOTE: Is this a code smell? very weird...
         aug_img = img
         aug_coords = coords
         size = [aug_img.shape[0], aug_img.shape[1]]
@@ -308,6 +310,18 @@ class TensorpackPoseDataset(BasePoseDataset):
             aug_coords.reshape(int(len(aug_coords[~np.isnan(aug_coords)]) / 2), 2)
         ]
         joint_id = data.joint_id
+
+        # Custom label visualisation for augmentation
+        from GETlab.toolkit import drawlabels
+        import imageio
+
+        joints_data = [[label, x, y] for label, (x, y) in zip(joint_id[0], aug_coords[0])]
+
+        # visualise augmentations
+        img_labeled = drawlabels.draw_augmented_labels(aug_img, joints_data)
+        name = data.im_path.split("/")[-1].split(".")[0]
+        print(name)
+        imageio.imwrite(f'/Users/jeff/GDA/figs/test_augmentation/tensorpack/{name}.png', img_labeled)
 
         return [joint_id, aug_img, aug_coords, data, size, scale]
 
