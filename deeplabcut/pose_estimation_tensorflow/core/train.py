@@ -79,7 +79,9 @@ def setup_preloading(batch_spec):
 
 def load_and_enqueue(sess, enqueue_op, coord, dataset, placeholders):
     while not coord.should_stop():
+        # Note: This is batch Augmentation! .next_batch() is a method of the pose_base.py module in the datasets folder
         batch_np = dataset.next_batch()
+        # print(f"sess: {sess}\nenqueue_op: {enqueue_op}\ncoord: {coord}\ndataset: {dataset}\nplaceholders: {placeholders}.")
         food = {pl: batch_np[name] for (name, pl) in placeholders.items()}
         sess.run(enqueue_op, feed_dict=food)
 
@@ -164,9 +166,12 @@ def train(
         )
         cfg["batch_size"] = 1  # in case this was edited for analysis.-
 
+    # "dataset" actually refers to the augmenter that is used.
     dataset = PoseDatasetFactory.create(cfg)
     batch_spec = get_batch_spec(cfg)
     batch, enqueue_op, placeholders = setup_preloading(batch_spec)
+
+    # print(f"batch: {batch}")
 
     losses = PoseNetFactory.create(cfg).train(batch)
     total_loss = losses["total_loss"]
@@ -214,6 +219,7 @@ def train(
     else:
         sess = tf.compat.v1.Session()
 
+    # "dataset" variable for augmentation option is used here
     coord, thread = start_preloading(sess, enqueue_op, dataset, placeholders)
     train_writer = tf.compat.v1.summary.FileWriter(cfg["log_dir"], sess.graph)
 
