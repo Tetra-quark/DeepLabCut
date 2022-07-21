@@ -18,7 +18,10 @@ class BasePoseNet(metaclass=abc.ABCMeta):
     def get_net(self, inputs):
         ...
 
+    # Note: It is here that the loss is defined.
     def train(self, batch):
+        # Note: I think heads[pred_layer] may actually be the likelihood map I was looking for. In fact this might not even be the likelihood but rather the map from which the likelihood is computed from.
+        # Note: would be cool to debug this while training and see what objects are passing in the loss functions. (To better understand what DLC loss actually comprises of. Probabilities or distances. What is being optimised? presumably both.)
         heads = self.get_net(batch[Batch.inputs])
         if self.cfg["weigh_part_predictions"]:
             part_score_weights = batch[Batch.part_score_weights]
@@ -159,6 +162,7 @@ class BasePoseNet(metaclass=abc.ABCMeta):
         indices = tf.transpose(a=tf.concat([maxloc, joints], axis=0))
         offset = tf.gather_nd(locref, indices)
         offset = tf.gather(offset, [1, 0], axis=1)
+        # TODO is it possible to get the likelihood surface?
         likelihood = tf.reshape(tf.gather_nd(probs, indices), (-1, 1))
 
         pose = (

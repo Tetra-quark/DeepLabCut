@@ -28,7 +28,7 @@ class PoseDatasetFactory:
 
     @classmethod
     def create(cls, cfg):
-        dataset_type = cfg["dataset_type"]
+        dataset_type = cfg["dataset_type"]  # specified augmenter
         dataset = cls._datasets.get(dataset_type)
         if dataset is None:
             raise ValueError(f"Unsupported dataset of type {dataset_type}")
