@@ -233,23 +233,20 @@ class DeterministicPoseDataset(BasePoseDataset):
                 }
             )
 
-            from GETlab.toolkit import drawlabels
-            import imageio
-
-            joints = scaled_joints[0]
-            labels = joint_id[0]
-
-            joints_data = [[label, x, y] for label, (x, y) in zip(labels, joints)]
-
-            # visualise augmentations
-            img_labeled = drawlabels.draw_augmented_labels(img, joints_data)
-            name = im_file.split("/")[-1].split(".")[0]
-            print(name)
-            folder = 'deterministic'
-            if self.cfg['dataset_type'] == 'scalecrop':
-                folder = 'scalecrop'
-            # TODO save augmentation images to a relevant DLC project directory for that model eventually.
-            imageio.imwrite(f'/Users/jeff/GDA/figs/test_augmentation/{folder}/{name}.png', img_labeled)
+            # # Custom visualisation for augmented images and labels
+            # from GETlab.toolkit import drawlabels
+            # import imageio
+            # joints = scaled_joints[0]
+            # labels = joint_id[0]
+            # joints_data = [[label, x, y] for label, (x, y) in zip(labels, joints)]
+            # img_labeled = drawlabels.draw_augmented_labels(img, joints_data)
+            # name = im_file.split("/")[-1].split(".")[0]
+            # print(name)
+            # folder = 'deterministic'
+            # if self.cfg['dataset_type'] == 'scalecrop':
+            #     folder = 'scalecrop'
+            # # TODO save augmentation images to a relevant DLC project directory for that model eventually.
+            # imageio.imwrite(f'/Users/jeff/GDA/figs/test_augmentation/{folder}/{name}.png', img_labeled)
 
         batch = {key: data_to_input(data) for (key, data) in batch.items()}
 

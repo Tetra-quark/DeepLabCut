@@ -311,17 +311,14 @@ class TensorpackPoseDataset(BasePoseDataset):
         ]
         joint_id = data.joint_id
 
-        # Custom label visualisation for augmentation
-        from GETlab.toolkit import drawlabels
-        import imageio
-
-        joints_data = [[label, x, y] for label, (x, y) in zip(joint_id[0], aug_coords[0])]
-
-        # visualise augmentations
-        img_labeled = drawlabels.draw_augmented_labels(aug_img, joints_data)
-        name = data.im_path.split("/")[-1].split(".")[0]
-        print(name)
-        imageio.imwrite(f'/Users/jeff/GDA/figs/test_augmentation/tensorpack/{name}.png', img_labeled)
+        # # Custom visualisation for augmented images and labels
+        # from GETlab.toolkit import drawlabels
+        # import imageio
+        # joints_data = [[label, x, y] for label, (x, y) in zip(joint_id[0], aug_coords[0])]
+        # img_labeled = drawlabels.draw_augmented_labels(aug_img, joints_data)
+        # name = data.im_path.split("/")[-1].split(".")[0]
+        # print(name)
+        # imageio.imwrite(f'/Users/jeff/GDA/figs/test_augmentation/tensorpack/{name}.png', img_labeled)
 
         return [joint_id, aug_img, aug_coords, data, size, scale]
 

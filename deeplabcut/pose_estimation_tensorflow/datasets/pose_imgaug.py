@@ -435,7 +435,7 @@ class ImgaugPoseDataset(BasePoseDataset):
 
 
             # If you would like to check the augmented images, script for saving
-            # the images with joints on:
+            # the images with joints on: (Original DLC version)
             # import imageio
             # for i in range(self.batch_size):
             #    joints = batch_joints[i]
@@ -443,23 +443,23 @@ class ImgaugPoseDataset(BasePoseDataset):
             #    im = kps.draw_on_image(batch_images[i])
             #    imageio.imwrite('some_location/augmented/'+str(i)+'.png', im)
 
-            # custom image aug visualisation and saving
-            from GETlab.toolkit import drawlabels
-            import imageio
-
-            # get only first image from the batch
-            im_file = data_items[0].im_path
-            joints = batch_joints[0]
-            labels = joint_ids[0][0]
-            img = batch_images[0]
-
-            joints_data = [[label, x, y] for label, (x, y) in zip(labels, joints)]
-
-            # visualise augmentations
-            img_labeled = drawlabels.draw_augmented_labels(img, joints_data)
-            name = im_file.split("/")[-1].split(".")[0]
-            print(name)
-            imageio.imwrite(f'/Users/jeff/GDA/figs/test_augmentation/imgaug/{name}.png', img_labeled)
+            # # Custom visualisation for augmented images and labels
+            # from GETlab.toolkit import drawlabels
+            # import imageio
+            #
+            # # get only first image from the batch
+            # im_file = data_items[0].im_path
+            # joints = batch_joints[0]
+            # labels = joint_ids[0][0]
+            # img = batch_images[0]
+            #
+            # joints_data = [[label, x, y] for label, (x, y) in zip(labels, joints)]
+            #
+            # # visualise augmentations
+            # img_labeled = drawlabels.draw_augmented_labels(img, joints_data)
+            # name = im_file.split("/")[-1].split(".")[0]
+            # print(name)
+            # imageio.imwrite(f'/Users/jeff/GDA/figs/test_augmentation/imgaug/{name}.png', img_labeled)
 
             image_shape = np.array(batch_images).shape[1:3]
             batch = {Batch.inputs: np.array(batch_images).astype(np.float64)}
