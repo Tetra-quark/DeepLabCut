@@ -181,6 +181,7 @@ if __name__ == "__main__":
         )
     except:  # if ffmpeg is broken/missing
         print("using alternative method")
+        # TODO .mp4 is an invalid assumption!
         newvideo = os.path.join(cfg["project_path"], "videos", videoname + "short.mp4")
         from moviepy.editor import VideoFileClip, VideoClip
 
