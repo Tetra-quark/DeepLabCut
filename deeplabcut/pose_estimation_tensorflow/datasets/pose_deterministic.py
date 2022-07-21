@@ -207,10 +207,10 @@ class DeterministicPoseDataset(BasePoseDataset):
             # TODO This is the only place where mirror joints is used.
             # flips the coordinates of the labels and swaps the symmetric label names
             if mirror:
-                joints = []
-                for person_joints in joints:
-                    joints.append(self.mirror_joints(person_joints, self.symmetric_joints, image.shape[1]))
-                # joints = [self.mirror_joints(person_joints, self.symmetric_joints, image.shape[1]) for person_joints in joints]
+                # joints = [] # removing this should fix the bug I introduced.. must not delete the joints list.
+                # for person_joints in joints:
+                #     joints.append(self.mirror_joints(person_joints, self.symmetric_joints, image.shape[1]))
+                joints = [self.mirror_joints(person_joints, self.symmetric_joints, image.shape[1]) for person_joints in joints]
 
             sm_size = np.ceil(scaled_img_size / (stride * 2)).astype(int) * 2
             scaled_joints = [person_joints[:, 1:3] * scale for person_joints in joints]
