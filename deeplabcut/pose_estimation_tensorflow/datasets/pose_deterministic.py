@@ -233,21 +233,22 @@ class DeterministicPoseDataset(BasePoseDataset):
                 }
             )
 
-        from GETlab.toolkit import drawlabels
-        import imageio
+            from GETlab.toolkit import drawlabels
+            import imageio
 
-        # NOTE: the joints need to be handled better in plotting in all augmenters.
-        #   Eg. scalecrop label plot doesn't plot the correct labels on the image.
-        #   it just plots the first ones in the list and then truncates the list. Locations are correct however.
+            joints = scaled_joints[0]
+            labels = joint_id[0]
 
-        # visualise augmentations
-        img_labeled = drawlabels.draw_augmented_labels(img, scaled_joints[0])
-        name = im_file.split("/")[-1].split(".")[0]
-        print(name)
-        folder = 'deterministic'
-        if self.cfg['deterministic'] is False:
-            folder = 'scalecrop'
-        imageio.imwrite(f'/Users/jeff/GDA/figs/test_augmentation/{folder}/{name}.png', img_labeled)
+            joints_data = [[label, x, y] for label, (x, y) in zip(labels, joints)]
+
+            # visualise augmentations
+            img_labeled = drawlabels.draw_augmented_labels(img, joints_data)
+            name = im_file.split("/")[-1].split(".")[0]
+            print(name)
+            folder = 'deterministic'
+            if self.cfg['dataset_type'] == 'scalecrop':
+                folder = 'scalecrop'
+            imageio.imwrite(f'/Users/jeff/GDA/figs/test_augmentation/{folder}/{name}.png', img_labeled)
 
         batch = {key: data_to_input(data) for (key, data) in batch.items()}
 
