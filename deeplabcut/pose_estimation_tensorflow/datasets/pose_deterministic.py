@@ -115,6 +115,7 @@ class DeterministicPoseDataset(BasePoseDataset):
         if self.cfg["deterministic"]:
             np.random.seed(42)
         num_images = self.num_images
+        # Note: Need to understand what this is doing
         if self.cfg["mirror"]:
             image_indices = np.random.permutation(num_images * 2)
             self.mirrored = image_indices >= num_images
@@ -125,6 +126,7 @@ class DeterministicPoseDataset(BasePoseDataset):
 
     def num_training_samples(self):
         num = self.num_images
+        # Note: what is the significance of this. Where is num_training_samples used?
         if self.cfg["mirror"]:
             num *= 2
         return num
@@ -137,6 +139,7 @@ class DeterministicPoseDataset(BasePoseDataset):
         self.curr_img = (self.curr_img + 1) % self.num_training_samples()
 
         imidx = self.image_indices[curr_img]
+        # Note depends on config hyperparameter and something else?
         mirror = self.cfg["mirror"] and self.mirrored[curr_img]
 
         return imidx, mirror
@@ -178,6 +181,10 @@ class DeterministicPoseDataset(BasePoseDataset):
         if self.has_gt:
             joints = np.copy(data_item.joints)
 
+        # Note: This caused an error in deterministic aug network test bc no crop parameter in pose_cfg.. idk what it does
+        #   Perhaps need to ask DLC gittter etc
+
+        # print(self.cfg)
         if self.cfg["crop"]:  # adapted cropping for DLC
             if np.random.rand() < self.cfg["cropratio"]:
                 j = np.random.randint(np.shape(joints)[1])
@@ -188,6 +195,7 @@ class DeterministicPoseDataset(BasePoseDataset):
         img = imresize(image, scale) if scale != 1 else image
         scaled_img_size = np.array(img.shape[0:2])
 
+        # flips the image for training
         if mirror:
             img = np.fliplr(img)
 
@@ -197,6 +205,7 @@ class DeterministicPoseDataset(BasePoseDataset):
             stride = self.cfg["stride"]
 
             # TODO This is the only place where mirror joints is used.
+            # flips the coordinates of the labels and swaps the symmetric label names
             if mirror:
                 joints = []
                 for person_joints in joints:
@@ -223,6 +232,22 @@ class DeterministicPoseDataset(BasePoseDataset):
                     Batch.locref_mask: locref_mask,
                 }
             )
+
+        from GETlab.toolkit import drawlabels
+        import imageio
+
+        # NOTE: the joints need to be handled better in plotting in all augmenters.
+        #   Eg. scalecrop label plot doesn't plot the correct labels on the image.
+        #   it just plots the first ones in the list and then truncates the list. Locations are correct however.
+
+        # visualise augmentations
+        img_labeled = drawlabels.draw_augmented_labels(img, scaled_joints[0])
+        name = im_file.split("/")[-1].split(".")[0]
+        print(name)
+        folder = 'deterministic'
+        if self.cfg['deterministic'] is False:
+            folder = 'scalecrop'
+        imageio.imwrite(f'/Users/jeff/GDA/figs/test_augmentation/{folder}/{name}.png', img_labeled)
 
         batch = {key: data_to_input(data) for (key, data) in batch.items()}
 
