@@ -248,6 +248,7 @@ class DeterministicPoseDataset(BasePoseDataset):
             folder = 'deterministic'
             if self.cfg['dataset_type'] == 'scalecrop':
                 folder = 'scalecrop'
+            # TODO save augmentation images to a relevant DLC project directory for that model eventually.
             imageio.imwrite(f'/Users/jeff/GDA/figs/test_augmentation/{folder}/{name}.png', img_labeled)
 
         batch = {key: data_to_input(data) for (key, data) in batch.items()}
