@@ -15,6 +15,10 @@ examples/.DS_Store
 # PyCharm Utilities (added manually by Jeff 01/03/22)
 .idea
 
+# Pretrained Nets (added manually by Jeff 21/07/22)
+deeplabcut/pose_estimation_tensorflow/models/pretrained/mobilenet*
+deeplabcut/pose_estimation_tensorflow/models/pretrained/efficientnet-b0/
+
 # Tensorflow checkpoints
 *.ckpt
 snapshot-*
