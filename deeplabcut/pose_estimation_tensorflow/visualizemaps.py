@@ -216,14 +216,15 @@ def extract_maps(
             Numimages = len(Data.index)
             PredicteData = np.zeros((Numimages, 3 * len(dlc_cfg["all_joints_names"])))
             print("Analyzing data...")
+            # TODO bad practice to create an instance of generator.. because it can ONLY BE ACCESSED ONCE
             if Indices is None:
-                Indices = enumerate(Data.index)
+                Indices = Data.index
             else:
                 Ind = [Data.index[j] for j in Indices]
-                Indices = enumerate(Ind)
+                Indices = Ind
 
             DATA = {}
-            for imageindex, imagename in tqdm(Indices):
+            for imageindex, imagename in tqdm(enumerate(Indices)):
                 image = imread(
                     os.path.join(cfg["project_path"], *imagename), mode="skimage"
                 )
