@@ -194,6 +194,7 @@ def extract_outlier_frames(
     savelabeled=False,
     copy_videos=False,
     destfolder=None,
+    trainingiteration="unknown", # specify if needed, otherwise latest will be selected.
     modelprefix="",
     track_method="",
 ):
@@ -365,6 +366,7 @@ def extract_outlier_frames(
         shuffle,
         trainFraction=cfg["TrainingFraction"][trainingsetindex],
         modelprefix=modelprefix,
+        trainingsiterations=trainingiteration
     )
 
     Videos = auxiliaryfunctions.get_list_of_videos(videos, videotype)
@@ -395,10 +397,30 @@ def extract_outlier_frames(
                 p = df_temp.xs("likelihood", level="coords", axis=1)
                 ind = df_temp.index[(p < p_bound).any(axis=1)].tolist()
                 Indices.extend(ind)
-            elif outlieralgorithm == "jump":
+            elif outlieralgorithm == "jump-uncertain":
+                # NOTE this seems to extract both the jump to and the jump from a mistaken prediction, but my thought also assumes same mistake is not made over multiple frames which probably in in fact the case.
+                # probablity mask
+                p = df_temp.xs("likelihood", level="coords", axis=1)
+                prob_condition = (p > p_bound).any(axis=1)
+                # temp_dt is the frame to frame difference in coords squared
                 temp_dt = df_temp.diff(axis=0) ** 2
                 temp_dt.drop("likelihood", axis=1, level="coords", inplace=True)
+                # sums the x^2 and the y^2
                 sum_ = temp_dt.sum(axis=1, level=1)
+                # the conditional statment avoids use of sqrt
+                jump_condition = (sum_ > epsilon ** 2).any(axis=1)
+                condition = [a and b for (a, b) in zip(jump_condition, prob_condition)]
+                print(df_temp.index[condition])
+                ind = df_temp.index[condition].tolist()
+                Indices.extend(ind)
+            elif outlieralgorithm == "jump":
+                # NOTE this seems to extract both the jump to and the jump from a mistaken prediction, but my thought also assumes same mistake is not made over multiple frames which probably in in fact the case.
+                # temp_dt is the frame to frame difference in coords squared
+                temp_dt = df_temp.diff(axis=0) ** 2
+                temp_dt.drop("likelihood", axis=1, level="coords", inplace=True)
+                # sums the x^2 and the y^2
+                sum_ = temp_dt.sum(axis=1, level=1)
+                # the conditional statment avoids use of sqrt
                 ind = df_temp.index[(sum_ > epsilon ** 2).any(axis=1)].tolist()
                 Indices.extend(ind)
             elif outlieralgorithm == "fitting":
@@ -805,6 +827,7 @@ def ExtractFramesbasedonPreselection(
             else:
                 return
             if Path(machinefile).is_file():
+                # NOTE if the machinelabels h5 file exists concatenate the files.
                 Data = pd.read_hdf(machinefile, "df_with_missing")
                 conversioncode.guarantee_multiindex_rows(Data)
                 DataCombined = pd.concat([Data, df])
@@ -920,6 +943,7 @@ def PlottingSingleFramecv2(
         tmpfolder, "img" + str(index).zfill(strwidth) + "labeled.png"
     )
 
+    # note saves image if not already in the folder.
     if not os.path.isfile(
         os.path.join(tmpfolder, "img" + str(index).zfill(strwidth) + ".png")
     ):
