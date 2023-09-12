@@ -19,14 +19,14 @@ import pandas as pd
 from tqdm import tqdm
 
 
-def pairwisedistances(DataCombined, scorer1, scorer2, pcutoff=-1, bodyparts=None):
+def pairwisedistances(data_combined, scorer1, scorer2, pcutoff=-1, bodyparts=None):
     """Calculates the pairwise Euclidean distance metric over body parts vs. images"""
-    mask = DataCombined[scorer2].xs("likelihood", level=1, axis=1) >= pcutoff
+    mask = data_combined[scorer2].xs("likelihood", level=1, axis=1) >= pcutoff
     if bodyparts is None:
-        Pointwisesquareddistance = (DataCombined[scorer1] - DataCombined[scorer2]) ** 2
+        Pointwisesquareddistance = (data_combined[scorer1] - data_combined[scorer2]) ** 2
     else:
         Pointwisesquareddistance = (
-            DataCombined[scorer1][bodyparts] - DataCombined[scorer2][bodyparts]) ** 2
+            data_combined[scorer1][bodyparts] - data_combined[scorer2][bodyparts]) ** 2
     euclidean_distances = np.sqrt(
         Pointwisesquareddistance.xs("x", level=1, axis=1)
         + Pointwisesquareddistance.xs("y", level=1, axis=1)
@@ -185,17 +185,17 @@ def calculatepafdistancebounds(
 
 
 def Plotting(
-    cfg, comparisonbodyparts, DLCscorer, trainIndices, DataCombined, foldername
+    cfg, comparisonbodyparts, DLCscorer, trainIndices, data_combined, foldername
 ):
     """Function used for plotting GT and predictions"""
     from deeplabcut.utils import visualization
 
     colors = visualization.get_cmap(len(comparisonbodyparts), name=cfg["colormap"])
-    NumFrames = np.size(DataCombined.index)
+    NumFrames = np.size(data_combined.index)
     fig, ax = visualization.create_minimal_figure()
     for ind in tqdm(np.arange(NumFrames)):
         ax = visualization.plot_and_save_labeled_frame(
-            DataCombined,
+            data_combined,
             ind,
             trainIndices,
             cfg,
@@ -405,9 +405,9 @@ def return_evaluate_network_data(
         if not returnjustfns:
             if not notanalyzed and os.path.isfile(resultsfilename):  # data exists..
                 DataMachine = pd.read_hdf(resultsfilename)
-                DataCombined = pd.concat([Data.T, DataMachine.T], axis=0).T
+                data_combined = pd.concat([Data.T, DataMachine.T], axis=0).T
                 RMSE, RMSEpcutoff = pairwisedistances(
-                    DataCombined,
+                    data_combined,
                     cfg["scorer"],
                     DLCscorer,
                     cfg["pcutoff"],
@@ -919,12 +919,12 @@ def evaluate_network(
                             "Analysis is done and the results are stored (see evaluation-results) for snapshot: ",
                             Snapshots[snapindex],
                         )
-                        DataCombined = pd.concat(
+                        data_combined = pd.concat(
                             [Data.T, DataMachine.T], axis=0, sort=False
                         ).T
 
                         RMSE, RMSEpcutoff = pairwisedistances(
-                            DataCombined,
+                            data_combined,
                             cfg["scorer"],
                             DLCscorer,
                             cfg["pcutoff"],
@@ -1007,7 +1007,7 @@ def evaluate_network(
                                 comparisonbodyparts,
                                 DLCscorer,
                                 trainIndices,
-                                DataCombined * 1.0 / scale,
+                                data_combined * 1.0 / scale,
                                 foldername,
                             )  # Rescaling coordinates to have figure in original size!
 
@@ -1017,7 +1017,7 @@ def evaluate_network(
                         DataMachine = pd.read_hdf(resultsfilename)
                         conversioncode.guarantee_multiindex_rows(DataMachine)
                         if plotting:
-                            DataCombined = pd.concat(
+                            data_combined = pd.concat(
                                 [Data.T, DataMachine.T], axis=0, sort=False
                             ).T
                             foldername = os.path.join(
@@ -1037,7 +1037,7 @@ def evaluate_network(
                                     comparisonbodyparts,
                                     DLCscorer,
                                     trainIndices,
-                                    DataCombined * 1.0 / scale,
+                                    data_combined * 1.0 / scale,
                                     foldername,
                                 )
                             else:
