@@ -23,13 +23,13 @@ def pairwisedistances(data_combined, scorer1, scorer2, pcutoff=-1, bodyparts=Non
     """Calculates the pairwise Euclidean distance metric over body parts vs. images"""
     mask = data_combined[scorer2].xs("likelihood", level=1, axis=1) >= pcutoff
     if bodyparts is None:
-        Pointwisesquareddistance = (data_combined[scorer1] - data_combined[scorer2]) ** 2
+        pointwise_square_distance = (data_combined[scorer1] - data_combined[scorer2]) ** 2
     else:
-        Pointwisesquareddistance = (
+        pointwise_square_distance = (
             data_combined[scorer1][bodyparts] - data_combined[scorer2][bodyparts]) ** 2
     euclidean_distances = np.sqrt(
-        Pointwisesquareddistance.xs("x", level=1, axis=1)
-        + Pointwisesquareddistance.xs("y", level=1, axis=1)
+        pointwise_square_distance.xs("x", level=1, axis=1)
+        + pointwise_square_distance.xs("y", level=1, axis=1)
     )  # Euclidean distance (proportional to RMSE)
     return euclidean_distances, euclidean_distances[mask]
 
