@@ -24,20 +24,14 @@ def pairwisedistances(DataCombined, scorer1, scorer2, pcutoff=-1, bodyparts=None
     mask = DataCombined[scorer2].xs("likelihood", level=1, axis=1) >= pcutoff
     if bodyparts is None:
         Pointwisesquareddistance = (DataCombined[scorer1] - DataCombined[scorer2]) ** 2
-        RMSE = np.sqrt(
-            Pointwisesquareddistance.xs("x", level=1, axis=1)
-            + Pointwisesquareddistance.xs("y", level=1, axis=1)
-        )  # Euclidean distance (proportional to RMSE)
-        return RMSE, RMSE[mask]
     else:
         Pointwisesquareddistance = (
-            DataCombined[scorer1][bodyparts] - DataCombined[scorer2][bodyparts]
-        ) ** 2
-        RMSE = np.sqrt(
-            Pointwisesquareddistance.xs("x", level=1, axis=1)
-            + Pointwisesquareddistance.xs("y", level=1, axis=1)
-        )  # Euclidean distance (proportional to RMSE)
-        return RMSE, RMSE[mask]
+            DataCombined[scorer1][bodyparts] - DataCombined[scorer2][bodyparts]) ** 2
+    RMSE = np.sqrt(
+        Pointwisesquareddistance.xs("x", level=1, axis=1)
+        + Pointwisesquareddistance.xs("y", level=1, axis=1)
+    )  # Euclidean distance (proportional to RMSE)
+    return RMSE, RMSE[mask]
 
 
 def distance(v, w):
