@@ -34,10 +34,6 @@ def pairwisedistances(data_combined, scorer1, scorer2, pcutoff=-1, bodyparts=Non
     return euclidean_distances, euclidean_distances[mask]
 
 
-def distance(v, w):
-    return np.sqrt(np.sum((v - w) ** 2))
-
-
 def calculatepafdistancebounds(
     config, shuffle=0, trainingsetindex=0, modelprefix="", numdigits=0, onlytrain=False
 ):
