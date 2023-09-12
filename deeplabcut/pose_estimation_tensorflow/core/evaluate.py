@@ -20,7 +20,7 @@ from tqdm import tqdm
 
 
 def pairwisedistances(data_combined, scorer1, scorer2, pcutoff=-1, bodyparts=None):
-    """Calculates the pairwise Euclidean distance metric over body parts vs. images"""
+    """Calculates the pairwise Euclidean distance metric between scorer1 and scorer2 bodypart locations."""
     mask = data_combined[scorer2].xs("likelihood", level=1, axis=1) >= pcutoff
     if bodyparts is None:
         pointwise_square_distance = (data_combined[scorer1] - data_combined[scorer2]) ** 2
