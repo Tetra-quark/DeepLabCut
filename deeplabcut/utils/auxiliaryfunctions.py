@@ -834,6 +834,12 @@ def find_next_unlabeled_folder(config_path, verbose=False):
     return next_folder
 
 
+def get_collected_data_file_path(cfg: dict, ext: str = 'h5') -> Path:
+    """Returns path to CollectedData. ext can indicate the 'h5' or 'csv' version of the file."""
+    trainingsetfolder = get_training_set_folder(cfg)
+    return Path(cfg['project_path']) / trainingsetfolder / f"CollectedData_{cfg['scorer']}.{ext}"
+
+
 # aliases for backwards-compatibility.
 SaveData = save_data
 SaveMetadata = save_metadata
