@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -76,6 +77,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -158,7 +168,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="UseOverviewGuide.html">Documentation Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UseOverviewGuide.html">🥳 Get started with DeepLabCut: our key recommendations</a></li>
 
 
 </ul>
@@ -380,10 +390,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -391,7 +401,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -419,7 +429,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-modes">Usage modes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gui-mode">GUI mode</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#terminal-mode">Terminal mode</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-mode">Jupyter Notebook mode</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-usage">Advanced usage</a></li>
@@ -449,7 +458,7 @@ document.write(`
 Note that this will <em>not</em> disprupt or install Tensorflow, or any other DeepLabCut dependencies on your computer—the Docker containers are completely isolated from your existing software installation!</p>
 <section id="usage-modes">
 <h2>Usage modes<a class="headerlink" href="#usage-modes" title="Permalink to this heading">#</a></h2>
-<p>With <code class="docutils literal notranslate"><span class="pre">deeplabcut-docker</span></code>, you can use the images in three modes.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">deeplabcut-docker</span></code>, you can use the images in two modes.</p>
 <ul class="simple">
 <li><p><em>Note 1: When running any of the following commands first, it can take some time to complete (a few minutes, depending on your internet connection), since it downloads the Docker image in the background. If you do not see any errors in your terminal, assume that everything is working fine! Subsequent runs of the command will be faster.</em></p></li>
 <li><p><em>Note 2: The Terminal mode image can be used on all supported platforms (Linux and MacOS). The GUI images can only be considered stable on Linux systems as of DeepLabCut 2.2.0.2 and need additional configuration on Mac.</em></p></li>
@@ -459,26 +468,15 @@ If you want to mount the whole directory could e.g., pass</em></p></li>
 <p><code class="docutils literal notranslate"><span class="pre">deeplabcut-docker</span> <span class="pre">bash</span> <span class="pre">-v</span> <span class="pre">/home/mackenzie/DEEPLABCUT:/home/mackenzie/DEEPLABCUT</span></code></p>
 <p>(which will mount the full directory into the container in read/write mode)</p>
 <p>If read-only access is enough, <code class="docutils literal notranslate"><span class="pre">deeplabcut-docker</span> <span class="pre">bash</span> <span class="pre">-v</span> <span class="pre">/home/mackenzie/DEEPLABCUT:/home/mackenzie/DEEPLABCUT:ro</span></code></p>
-<section id="gui-mode">
-<h3>GUI mode<a class="headerlink" href="#gui-mode" title="Permalink to this heading">#</a></h3>
-<p>To run DeepLabCut in GUI mode and start the DeepLabCut GUI, simply run</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>deeplabcut-docker<span class="w"> </span>gui
-</pre></div>
-</div>
-<p>which will pull the latest DeepLabCut version along with all dependencies, and afterwards opens the DeepLabCut GUI.</p>
-<p>The DeepLabCut version in this container is equivalent to the one you install with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">&quot;deeplabcut[gui]&quot;</span></code>.</p>
-</section>
 <section id="terminal-mode">
 <h3>Terminal mode<a class="headerlink" href="#terminal-mode" title="Permalink to this heading">#</a></h3>
 <p>If you not need the GUI, you can run the light version of DeepLabCut and open a terminal by running</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>deeplabcut-docker<span class="w"> </span>bash
 </pre></div>
 </div>
-<p>Inside the terminal, you can confirm that DeepLabCut is correctly installed by running</p>
+<p>Inside the terminal, you can confirm that DeepLabCut is correctly installed by running and noting which version installs.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ipython
 &gt;&gt;&gt;<span class="w"> </span>import<span class="w"> </span>deeplabcut
-&gt;&gt;&gt;<span class="w"> </span>print<span class="o">(</span>deeplabcut.__version__<span class="o">)</span>
-<span class="m">2</span>.2.0.2
 </pre></div>
 </div>
 </section>
@@ -523,7 +521,7 @@ Create the docker group.</p>
 </section>
 <section id="notes-and-troubleshooting">
 <h2>Notes and troubleshooting<a class="headerlink" href="#notes-and-troubleshooting" title="Permalink to this heading">#</a></h2>
-<p>Running Docker with GUI support can vary across systems. The current images are confirmed to work with different Linux systems, but especially on MacOS additional configuration steps are necessary.</p>
+<p>We dropped GUI support in 2.3.5+ due to too many numerous issues supporting them. Also please note these are tested on unix systems.</p>
 <p>When running containers on Linux, in some systems it might be necessary to run <code class="docutils literal notranslate"><span class="pre">host</span> <span class="pre">+local:docker</span></code> before starting the image via <code class="docutils literal notranslate"><span class="pre">deeplabcut-docker</span></code>.</p>
 <p>If you encounter errors while using the images, please open an issue in the DeepLabCut repo—especially the <code class="docutils literal notranslate"><span class="pre">deeplabcut-docker</span></code> is still in its alpha version, and we appreciate user feedback to make the tool robust to use across many operating systems!</p>
 </section>
@@ -554,11 +552,10 @@ Create the docker group.</p>
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="recipes/installTips.html"
@@ -578,10 +575,7 @@ Create the docker group.</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -597,7 +591,6 @@ Create the docker group.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-modes">Usage modes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gui-mode">GUI mode</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#terminal-mode">Terminal mode</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-mode">Jupyter Notebook mode</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-usage">Advanced usage</a></li>
@@ -656,8 +649,8 @@ By The DeepLabCut Team
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
 
   <footer class="bd-footer">
   </footer>
