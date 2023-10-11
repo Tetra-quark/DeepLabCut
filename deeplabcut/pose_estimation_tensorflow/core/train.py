@@ -266,7 +266,6 @@ def train(
     lr_gen = LearningRate(cfg)
 
     stats_path = Path(config_yaml).with_name("learning_stats.csv")
-    lrf = open(str(stats_path), "w")
 
     print("Training parameter:")
     print(cfg)
@@ -289,20 +288,15 @@ def train(
         if it % display_iters == 0 and it > start_iter:
             average_loss = cum_loss / display_iters
             cum_loss = 0.0
-            logging.info(
-                "iteration: {} loss: {} lr: {}".format(
-                    it, "{0:.4f}".format(average_loss), current_lr
-                )
-            )
-            lrf.write("{}, {:.5f}, {}\n".format(it, average_loss, current_lr))
-            lrf.flush()
+            logging.info(f"iteration: {it} loss: {average_loss:.4f} lr: {current_lr}")
+            with open(str(stats_path), "a") as lrf:
+                lrf.write(f"{it}, {average_loss:.5f}, {current_lr}\n")
 
         # Save snapshot
         if (it % save_iters == 0 and it != start_iter) or it == max_iter:
             model_name = cfg["snapshot_prefix"]
             saver.save(sess, model_name, global_step=it)
 
-    lrf.close()
     sess.close()
     coord.request_stop()
     coord.join([thread])
