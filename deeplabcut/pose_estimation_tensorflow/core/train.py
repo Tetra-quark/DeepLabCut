@@ -34,13 +34,24 @@ from deeplabcut.pose_estimation_tensorflow.util.logging import setup_logging
 
 
 class LearningRate(object):
-    def __init__(self, cfg):
+    def __init__(self, cfg: dict, start_iteration: int):
         self.steps = cfg["multi_step"]
-        self.current_step = 0
+
+        self.current_step = None
+        for idx, (_, iteration_step) in enumerate(self.steps):
+            if start_iteration < iteration_step:
+                self.current_step = idx
+                break
+        if self.current_step is None:
+            warnings.warn(
+                f"The 'multi_step' train/pose_cfg parameter is not defined for the current snapshot with "
+                f"{start_iteration} training iterations. Defaulting to last learning rate from 'multi_step'."
+            )
+            self.current_step = len(self.steps) - 1
 
     def get_lr(self, iteration):
-        lr = self.steps[self.current_step][0]
-        if iteration == self.steps[self.current_step][1]:
+        lr, iteration_step = self.steps[self.current_step]
+        if iteration == iteration_step:
             self.current_step += 1
 
         return lr
@@ -263,7 +274,7 @@ def train(
         print("Save_iters overwritten as", save_iters)
 
     cum_loss = 0.0
-    lr_gen = LearningRate(cfg)
+    lr_gen = LearningRate(cfg, start_iter)
 
     stats_path = Path(config_yaml).with_name("learning_stats.csv")
 
