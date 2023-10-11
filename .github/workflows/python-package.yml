@@ -2,7 +2,7 @@ name: Python package
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, fix_resume_training_learning_rate ]
   pull_request:
     branches: [ main ]
 
