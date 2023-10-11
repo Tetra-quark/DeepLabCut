@@ -281,7 +281,10 @@ def train(
     print("Training parameter:")
     print(cfg)
     print("Starting training....")
+    # NOTE This means the iteration numbers in the multistep parameter are relative and not absolute... Is this how it is intended to work?
     max_iter += start_iter  # max_iter is relative to start_iter
+    # NOTE: This training range is odd, should be corrected unless there is a good reason for it. There is one more iteration than expected. It actually results in the iteration count being innaccurate
+    #  snapshot-n is in fact iteration n+1 technically, and if retraining from snapshot-n it will loop over the value of n again! but if statement prevents snapshot being overwritten!
     for it in range(start_iter, max_iter + 1):
         if "efficientnet" in net_type:
             lr_dict = {tstep: it - start_iter}
