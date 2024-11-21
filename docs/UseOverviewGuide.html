@@ -14,45 +14,48 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -60,10 +63,11 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/UseOverviewGuide';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="How To Install DeepLabCut" href="installation.html" />
+    <link rel="next" title="DeepLabCut Self-paced Course" href="course.html" />
     <link rel="prev" title="Welcome! 👋" href="../README.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -71,31 +75,16 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -103,7 +92,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -111,10 +99,15 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -123,7 +116,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -138,6 +132,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../README.html">
   
@@ -151,21 +147,17 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="DeepLabCut - Home"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="DeepLabCut - Home"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="DeepLabCut - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -181,6 +173,9 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">🥳 Get started with DeepLabCut: our key recommendations</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="course.html">DeepLabCut Self-paced Course</a></li>
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
 <ul class="nav bd-sidenav">
@@ -188,7 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="recipes/installTips.html">Installation Tips</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">DeepLabCut Docker containers</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Main User Guides</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="standardDeepLabCut_UserGuide.html">DeepLabCut User Guide (for single animal projects)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maDLC_UserGuide.html">DeepLabCut for Multi-Animal Projects</a></li>
@@ -198,38 +193,53 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Graphical User Interfaces (GUIs)</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="PROJECT_GUI.html">Interactive Project Manager GUI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="napari_GUI.html">napari labeling GUI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recipes/ClusteringNapari.html">Clustering in the napari-DeepLabCut GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui/PROJECT_GUI.html">Interactive Project Manager GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui/napari_GUI.html">napari labeling GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DLC3 PyTorch Specific Docs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pytorch/user_guide.html">DeepLabCut 3.0 - Pytorch User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch/pytorch_config.html">The PyTorch Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch/architectures.html">DeepLabCut 3.0 - PyTorch Model Architectures</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quick Start Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="quick-start/single_animal_quick_guide.html">QUICK GUIDE to single Animal Training:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick-start/tutorial_maDLC.html">Multi-animal pose estimation with DeepLabCut: A 5-minute tutorial</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🚀 Beginner's Guide to DeepLabCut</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="beginner-guides/beginners-guide.html">Using DeepLabCut</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beginner-guides/manage-project.html">Setting up what keypoints to track</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beginner-guides/labeling.html">Labeling GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beginner-guides/Training-Evaluation.html">Neural Network training and evaluation in the GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beginner-guides/video-analysis.html">Video Analysis with DeepLabCut</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hardware Tips</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="recipes/TechHardware.html">Technical (Hardware) Considerations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DeepLabCut-Live!</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="deeplabcutlive.html">DeepLabCut-Live!</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">DeepLabCut Model Zoo</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🦄 DeepLabCut Model Zoo</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ModelZoo.html">The DeepLabCut Model Zoo!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recipes/UsingModelZooPupil.html">Using ModelZoo models on your own datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recipes/MegaDetectorDLCLive.html">💚 MegaDetector+DeepLabCut 💜</a></li>
 
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">DeepLabCut Benchmark</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🧑‍🍳 Cookbook (detailed helper guides)</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="benchmark.html">DeepLabCut benchmark</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hardware</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="recipes/TechHardware.html">Technical (Hardware) Considerations</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials &amp; Cookbook</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Multi-animal pose estimation with DeepLabCut: A 5-minute tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="convert_maDLC.html">How to convert a pre-2.2 project for use with DeepLabCut 2.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/OtherData.html">How to use data labeled outside of DeepLabCut</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recipes/io.html">Input/output manipulations with DeepLabCut</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recipes/nn.html">Model training tips &amp; tricks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recipes/post.html">Some data processing recipes!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recipes/BatchProcessing.html">Automate training and video analysis: Batch Processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recipes/DLCMethods.html">How to write a DLC Methods Section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/ClusteringNapari.html">Clustering in the napari-DeepLabCut GUI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recipes/OpenVINO.html">Intel OpenVINO backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recipes/flip_and_rotate.html">Improving network performance on unbalanced data via augmentation 🦇</a></li>
 
@@ -240,11 +250,20 @@
 
 <li class="toctree-l1"><a class="reference internal" href="recipes/publishing_notebooks_into_the_DLC_main_cookbook.html">Publishing Notebooks into the Main DLC Cookbook</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DeepLabCut Benchmarking</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="benchmark.html">DeepLabCut benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch/Benchmarking_shuffle_guide.html">DeepLabCut Benchmarking - User Guide</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mission &amp; Contribute</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="MISSION_AND_VALUES.html">Mission and Values of DeepLabCut</a></li>
 <li class="toctree-l1"><a class="reference internal" href="roadmap.html">A development roadmap for DeepLabCut</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Governance.html">Governance Model of DeepLabCut</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Citations for DeepLabCut</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="citation.html">How to Cite DeepLabCut</a></li>
 </ul>
 
     </div>
@@ -260,7 +279,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -269,14 +288,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -399,27 +418,19 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -441,7 +452,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">🥳 Get started with DeepLabCut: our key recommendations</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-deeplabcut"><span class="xref myst">How to install DeepLabCut</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-deeplabcut"><span class="xref myst">How to install DeepLabCut</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-support">What we support:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-need-to-get-started">What you need to get started:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-don-t-need-to-get-started">What you DON’T need to get started:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Overview:</a></li>
@@ -452,7 +464,7 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#specific-advice-for-using-deeplabcut">Specific Advice for Using DeepLabCut:</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-information-on-using-deeplabcut">Important information on using DeepLabCut:</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information-for-getting-started-with-madeeplabcut-aka-deeplabcut-2-2">Additional information for getting started with maDeepLabCut (aka DeepLabCut 2.2):</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information-for-getting-started-with-madeeplabcut">Additional information for getting started with maDeepLabCut:</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-scenario-do-you-have"><em>What scenario do you have?</em></a></li>
 </ul>
 </li>
@@ -481,19 +493,43 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="get-started-with-deeplabcut-our-key-recommendations">
 <span id="overview"></span><h1>🥳 Get started with DeepLabCut: our key recommendations<a class="headerlink" href="#get-started-with-deeplabcut-our-key-recommendations" title="Link to this heading">#</a></h1>
 <p>Below we will first outline what you need to get started, the different ways you can use DeepLabCut, and then the full workflow. Note, we highly recommend you also read and follow our <a class="reference external" href="https://www.nature.com/articles/s41596-019-0176-0">Nature Protocols paper</a>, which is (still) fully relevant to standard DeepLabCut.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>💡📚 If you are new to Python and DeepLabCut, you might consider checking our <a class="reference external" href="https://deeplabcut.github.io/DeepLabCut/docs/beginner-guides/beginners-guide.html">beginner guide</a> once you are ready to jump into using the DeepLabCut App!</p>
+</div>
 <section id="how-to-install-deeplabcut">
 <h2><a class="reference internal" href="installation.html#how-to-install"><span class="std std-ref">How to install DeepLabCut</span></a><a class="headerlink" href="#how-to-install-deeplabcut" title="Link to this heading">#</a></h2>
+<p>We don’t cover installation in depth on this page, so click on the link above if that is what you are looking for. See below for details on getting started with DeepLabCut!</p>
+</section>
+<section id="what-we-support">
+<h2>What we support:<a class="headerlink" href="#what-we-support" title="Link to this heading">#</a></h2>
+<p>We are primarily a package that enables deep learning-based pose estimation. We have a lot of models and options, but don’t get overwhelmed – the developer team has tried our best to “set the best defaults we possibly can”!</p>
 <ul class="simple">
-<li><p>Decide on your needs: there are <strong>two main modes, standard DeepLabCut or multi-animal DeepLabCut</strong>. We highly recommend carefully considering which one is best for your needs. For example, a white mouse + black mouse would call for standard, while two black mice would use multi-animal. <strong><a class="reference internal" href="#important-info-regd-usage"><span class="std std-ref">Important Information on how to use DLC in different scenarios (single vs multi animal)</span></a></strong> Then pick:</p></li>
+<li><p>Decide on your needs: there are <strong>two main modes, standard DeepLabCut or multi-animal DeepLabCut</strong>. We highly recommend carefully considering which one is best for your needs. For example, a white mouse + black mouse would call for standard, while two black mice would use multi-animal. <strong><a class="reference internal" href="#important-info-regd-usage"><span class="std std-ref">Important Information on how to use DLC in different scenarios (single vs multi animal)</span></a></strong> Then pick a user guide:</p></li>
 <li><p>(1) <a class="reference internal" href="standardDeepLabCut_UserGuide.html#single-animal-userguide"><span class="std std-ref">How to use standard DeepLabCut</span></a></p></li>
 <li><p>(2) <a class="reference internal" href="maDLC_UserGuide.html#multi-animal-userguide"><span class="std std-ref">How to use multi-animal DeepLabCut</span></a></p></li>
+<li><p>To note, as of DLC3+ the single and multi-animal code bases are more integrated and we support <strong>top-down</strong>,  <strong>bottom-up</strong>, and a new “hybrid” approach that is state-of-the-art, called <strong>BUCTD</strong> (bottom-up conditional top down), models.</p>
+<ul>
+<li><p>If these terms are new to you, check out our <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0896627320307170">Primer on Motion Capture with Deep Learning!</a>. In brief, both work for single or multiple animals and each method can be better or worse on your data.</p></li>
 </ul>
+</li>
+</ul>
+<p align="center">
+<img src= https://ars.els-cdn.com/content/image/1-s2.0-S0896627320307170-gr5_lrg.jpg?format=1000w width="50%">
+ </p>
+<ul class="simple">
+<li><p>Here is more information on BUCTD:</p></li>
+</ul>
+<p align="center">
+<img src= https://github.com/amathislab/BUCTD/raw/main/media/BUCTD_fig1.png?format=1000w width="50%">
+ </p>
 <p><strong>Additional Learning Resources:</strong></p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.youtube.com/channel/UC2HEbWpC_1v6i9RnDMy-dfA?view_as=subscriber">TUTORIALS:</a> video tutorials that demonstrate various aspects of using the code base.</p></li>
 <li><p><a class="reference internal" href="#overview"><span class="std std-ref">HOW-TO-GUIDES:</span></a> step-by-step user guidelines for using DeepLabCut on your own datasets (see below)</p></li>
 <li><p><a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut-Workshop-Materials">EXPLANATIONS:</a> resources on understanding how DeepLabCut works</p></li>
 <li><p><a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut#references">REFERENCES:</a> read the science behind DeepLabCut</p></li>
+<li><p><a class="reference external" href="https://deeplabcut.github.io/DeepLabCut/docs/beginners-guide.html">BEGINNER GUIDE TO THE GUI</a></p></li>
 </ul>
 <p>Getting Started: <a class="reference external" href="https://www.youtube.com/watch?v=A9qZidI7tL8">a video tutorial on navigating the documentation!</a></p>
 <section id="what-you-need-to-get-started">
@@ -507,7 +543,7 @@ document.write(`
 <h3>What you DON’T need to get started:<a class="headerlink" href="#what-you-don-t-need-to-get-started" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>no specific cameras/videos are required; color, monochrome, etc., is all fine. If you can see what you want to measure, then this will work for you (given enough labeled data).</p></li>
-<li><p>no specific computer is required (but see recommendations above), our software works on Linux, Windows, and MacOS, although we recommend Ubuntu.</p></li>
+<li><p>no specific computer is required (but see recommendations above), our software works on Linux, Windows, and MacOS.</p></li>
 </ul>
 </section>
 <section id="id1">
@@ -516,19 +552,15 @@ document.write(`
 <p align="center">
 <img src=   https://images.squarespace-cdn.com/content/v1/57f6d51c9f74566f55ecf271/1572293604382-W6BWA63LZ9J8R7N0QEA5/ke17ZwdGBToddI8pDm48kIw6YkRUEyoge4858uAJfaMUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYwL8IeDg6_3B-BRuF4nNrNcQkVuAT7tdErd0wQFEGFSnH9wUPiI8bGoX-EQadkbLIJwhzjIpw393-uEwSKO7VZIL9gN_Sb5I_dLwvWryjeCJg/dlc_overview-01.png?format=1000w width="80%">
  </p>
+ <p align="center">
+ <img src="https://images.squarespace-cdn.com/content/v1/57f6d51c9f74566f55ecf271/1560124235138-A9VEZB45SQPD5Z0BDEXA/ke17ZwdGBToddI8pDm48kKsvCFNoOAts8bgs5LXY20UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcZaDohTswVrVk6oKw3G03bTl18OXeDyNJsBjNlGiyPYGo9Ewyd5AI5wx6CleNeBtf/dlc_steps.jpg?format=1000w" height="270">
+</p>
 </section>
 <section id="overview-of-the-workflow">
 <h3>Overview of the workflow:<a class="headerlink" href="#overview-of-the-workflow" title="Link to this heading">#</a></h3>
 <p>This page contains a list of the essential functions of DeepLabCut as well as demos. There are many optional parameters with each described function, which you can find <a class="reference internal" href="#functionDetails.md"><span class="xref myst">here</span></a>. For additional assistance, you can use the <a class="reference internal" href="#help"><span class="std std-ref">help</span></a> function to better understand what each function does.</p>
  <p align="center">
 <img src="https://static1.squarespace.com/static/57f6d51c9f74566f55ecf271/t/5cca272524a69435c3251c40/1556752170424/flowfig.jpg?format=1000w" height="270">
-<img src="https://images.squarespace-cdn.com/content/v1/57f6d51c9f74566f55ecf271/1560124235138-A9VEZB45SQPD5Z0BDEXA/ke17ZwdGBToddI8pDm48kKsvCFNoOAts8bgs5LXY20UUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcZaDohTswVrVk6oKw3G03bTl18OXeDyNJsBjNlGiyPYGo9Ewyd5AI5wx6CleNeBtf/dlc_steps.jpg?format=1000w" height="270">
-</p>
-<p><strong>NOTE:</strong> There is a highly similar workflow for 2.2+ (and your 2.X projects are still fully compatible with this format!).</p>
-<p>** DLC 2.2:** as of 2.2 we support “multi-animal projects,” but these new features can also be used on single animals too (details below). The workflow is highly similar, but with a few key additional steps. Please carefully review the functions below for more details. You can search/look for <strong>maDeepLabCut</strong> for specific steps that are changed, or see this more comprehensive guide <a class="reference internal" href="#/docs/maDLC_AdvUserGuide.md"><span class="xref myst">here</span></a></p>
- <p align="center">
-<img src="https://images.squarespace-cdn.com/content/v1/57f6d51c9f74566f55ecf271/1596370260800-SP2GWKDPJCOIR7LJ31VM/ke17ZwdGBToddI8pDm48kB4fL2ovSQh5dRlH2jCMtpoUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcSV94BuD0XUinmig_1P1RJNYVU597j3jgswapL4c_w92BJE9r6UgUperYhWQ2ubQ_/workflow.png?format=2500w" height="570">
- </p>
 <p>You can have as many projects on your computer as you wish. You can have DeepLabCut installed in an <a class="reference internal" href="#/conda-environments"><span class="xref myst">environment</span></a> and always exit and return to this environment to run the code. You just need to point to the correct <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> file to <a class="reference internal" href="#tips-for-daily-use"><span class="std std-ref">jump back in</span></a>! The documentation below will take you through the individual steps.</p>
 <p align="center">
 <img src=  https://images.squarespace-cdn.com/content/v1/57f6d51c9f74566f55ecf271/1559758477126-B9PU1EFA7L7L1I24Z2EH/ke17ZwdGBToddI8pDm48kH6mtUjqMdETiS6k4kEkCoR7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQf4d-kVja3vCG3Q_2S8RPAcZTZ9JxgjXkf3-Un9aT84H3bqxw7fF48mhrq5Ulr0Hg/howtouseDLC2d_3d-01.png?format=500w width="60%">
@@ -540,10 +572,10 @@ document.write(`
 <span id="important-info-regd-usage"></span><h1>Specific Advice for Using DeepLabCut:<a class="headerlink" href="#specific-advice-for-using-deeplabcut" title="Link to this heading">#</a></h1>
 <section id="important-information-on-using-deeplabcut">
 <h2>Important information on using DeepLabCut:<a class="headerlink" href="#important-information-on-using-deeplabcut" title="Link to this heading">#</a></h2>
-<p>We recommend first using <strong>DeepLabCut for a single animal scenario</strong> to understand the workflow - even if it’s just our demo data. Multi-animal tracking is more complex - i.e. it has several decisions the user needs to make. Then, when you are ready you can jump into 2.2…</p>
-<section id="additional-information-for-getting-started-with-madeeplabcut-aka-deeplabcut-2-2">
-<h3>Additional information for getting started with maDeepLabCut (aka DeepLabCut 2.2):<a class="headerlink" href="#additional-information-for-getting-started-with-madeeplabcut-aka-deeplabcut-2-2" title="Link to this heading">#</a></h3>
-<p>We highly recommend using 2.2 first in the Project Manager GUI (<a class="reference internal" href="#docs/functionDetails.md#deeplabcut-project-manager-gui"><span class="xref myst">Option 3</span></a>). This will allow you to get used to the additional steps by being walked through the process. Then, you can always use all the functions in your favorite IDE, notebooks, etc.</p>
+<p>We recommend first using <strong>DeepLabCut for a single animal scenario</strong> to understand the workflow - even if it’s just our demo data. Multi-animal tracking is more complex - i.e. it has several decisions the user needs to make. Then, when you are ready you can jump into multi-animals…</p>
+<section id="additional-information-for-getting-started-with-madeeplabcut">
+<h3>Additional information for getting started with maDeepLabCut:<a class="headerlink" href="#additional-information-for-getting-started-with-madeeplabcut" title="Link to this heading">#</a></h3>
+<p>We highly recommend using it first in the Project Manager GUI (<a class="reference internal" href="#docs/functionDetails.md#deeplabcut-project-manager-gui"><span class="xref myst">Option 3</span></a>). This will allow you to get used to the additional steps by being walked through the process. Then, you can always use all the functions in your favorite IDE, notebooks, etc.</p>
 <section id="what-scenario-do-you-have">
 <h4><em>What scenario do you have?</em><a class="headerlink" href="#what-scenario-do-you-have" title="Link to this heading">#</a></h4>
 <ul class="simple">
@@ -647,7 +679,7 @@ If you are using DeepLabCut on the cloud, you cannot use the GUIs. If you use Wi
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -660,11 +692,11 @@ If you are using DeepLabCut on the cloud, you cannot use the GUIs. If you use Wi
       </div>
     </a>
     <a class="right-next"
-       href="installation.html"
+       href="course.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">How To Install DeepLabCut</p>
+        <p class="prev-next-title">DeepLabCut Self-paced Course</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -675,7 +707,8 @@ If you are using DeepLabCut on the cloud, you cannot use the GUIs. If you use Wi
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -685,7 +718,8 @@ If you are using DeepLabCut on the cloud, you cannot use the GUIs. If you use Wi
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">🥳 Get started with DeepLabCut: our key recommendations</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-deeplabcut"><span class="xref myst">How to install DeepLabCut</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-deeplabcut"><span class="xref myst">How to install DeepLabCut</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-support">What we support:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-need-to-get-started">What you need to get started:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-don-t-need-to-get-started">What you DON’T need to get started:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Overview:</a></li>
@@ -696,7 +730,7 @@ If you are using DeepLabCut on the cloud, you cannot use the GUIs. If you use Wi
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#specific-advice-for-using-deeplabcut">Specific Advice for Using DeepLabCut:</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-information-on-using-deeplabcut">Important information on using DeepLabCut:</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information-for-getting-started-with-madeeplabcut-aka-deeplabcut-2-2">Additional information for getting started with maDeepLabCut (aka DeepLabCut 2.2):</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information-for-getting-started-with-madeeplabcut">Additional information for getting started with maDeepLabCut:</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-scenario-do-you-have"><em>What scenario do you have?</em></a></li>
 </ul>
 </li>
@@ -763,8 +797,8 @@ By The DeepLabCut Team
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

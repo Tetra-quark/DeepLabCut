@@ -21,7 +21,7 @@ Thus, you should always label, train, and evaluate the pose estimation performan
 
 ## Install:
 
-**Quick start:** If you are using DeepLabCut on the cloud, or otherwise cannot use the GUIs and you should install with: `pip install 'deeplabcut[tf]'`; if you need GUI support, please use: `pip install 'deeplabcut[tf,gui]'`. On newer Apple computers (with an M1/M2 chip), use `pip install 'deeplabcut[apple_mchips]'` or `pip install 'deeplabcut[apple_mchips,gui]'` instead.
+**Quick start:** If you are using DeepLabCut on the cloud, or otherwise cannot use the GUIs and you should install with: `pip install 'deeplabcut'`; if you need GUI support, please use: `pip install 'deeplabcut[gui]'`.
 
 IF you want to use the bleeding edge version to make edits to the code, see here on how to install it and test it (https://deeplabcut.github.io/DeepLabCut/docs/recipes/installTips.html#how-to-use-the-latest-updates-directly-from-github).
 
@@ -417,6 +417,8 @@ You should also plot the scoremaps, locref layers, and PAFs to assess performanc
 deeplabcut.extract_save_all_maps(config_path, shuffle=shuffle, Indices=[0, 5])
 ```
 you can drop "Indices" to run this on all training/testing images (this is very slow!)
+
+### Evaluating your network on videos
 
 **-------------------- DECISION POINT -------------------**
 
