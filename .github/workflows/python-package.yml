@@ -23,9 +23,25 @@ jobs:
           - os: windows-latest
             path: ~\AppData\Local\pip\Cache
 
+
+
     steps:
+
+      - name: Start MEASUREMENT
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: start-measurement
+        # continue-on-error: true # recommended setting for production. See notes below.
+    
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Checkout Repo MEASUREMENT
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: get-measurement
+          label: 'repo checkout'
+        # continue-on-error: true # recommended setting for production. See notes below.
 
       - name: Set up Python
         uses: conda-incubator/setup-miniconda@v3
@@ -33,6 +49,12 @@ jobs:
           channels: conda-forge,defaults
           channel-priority: strict
           python-version: ${{ matrix.python-version }}
+
+      - name: Setup Python MEASUREMENT
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: get-measurement
+          label: 'python setup'
 
       - name: Install TensorFlow
         shell: bash -el {0}  # Important: activates the conda environment
@@ -50,6 +72,13 @@ jobs:
         shell: bash -el {0}  # Important: activates the conda environment
         run: |
           conda install pytables==3.8.0 "numpy<2"
+
+      ### ENERGY MEASUREMENT
+      - name: Install TensorFlow and PyTables MEASUREMENT
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: get-measurement
+          label: 'tf pytables setup'
 
       - name: Install dependencies
         shell: bash -el {0}  # Important: activates the conda environment
@@ -69,11 +98,24 @@ jobs:
           fi
         shell: bash
 
+      - name: Install Remaining Dependencies MEASUREMENT
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: get-measurement
+          label: 'remaining deps setup'
+
       - name: Run pytest tests
         shell: bash -el {0}  # Important: activates the conda environment
         run: |
           pip install pytest
           python -m pytest
+
+      ### ENERGY MEASUREMENT
+      - name: Unit Tests MEASUREMENT
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: get-measurement
+          label: 'unit tests'
 
       - name: Run functional tests
         shell: bash -el {0}  # Important: activates the conda environment
@@ -83,3 +125,10 @@ jobs:
           python examples/testscript_multianimal.py
           python examples/testscript_pytorch_single_animal.py
           python examples/testscript_pytorch_multi_animal.py
+
+        ### ENERGY MEASUREMENT
+      - name: Functional Tests MEASUREMENT
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: get-measurement
+          label: 'functional tests'
